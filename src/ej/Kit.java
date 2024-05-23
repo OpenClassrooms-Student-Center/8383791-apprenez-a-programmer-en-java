@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Kit {
 	
-	private Set<Bloc> blocs = new LinkedHashSet<Bloc>();
+	private Set<IBloc> blocs = new LinkedHashSet<IBloc>();
 	private Set<String> motsCles = new LinkedHashSet<String>();
 	
 	public Kit() {
