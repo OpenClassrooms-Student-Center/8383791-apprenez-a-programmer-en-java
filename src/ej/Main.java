@@ -6,7 +6,7 @@ public class Main {
 		affichage("Marty");
 	}
 	
-	public static void affichage(String texte) {
+	public static void affichage(final String texte) {
 		System.out.println("Bonjour " + texte);
 	}
 	
