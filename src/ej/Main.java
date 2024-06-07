@@ -3,10 +3,17 @@ package ej;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -75,20 +82,28 @@ public class Main {
 	private static Set<IBloc> constructionSetBlocs() throws IllegalBlocException {
 		Set<IBloc> blocs = new LinkedHashSet<IBloc>();
 
-		// Le kit contient 4 blocs Mur.
-		blocs.add(new Mur(3, 2, 2, true));
-		blocs.add(new Mur(3, 2, 2, true));
-		blocs.add(new Mur(2, 1, 2, false));
-		blocs.add(new Mur(2, 1, 2, false));
+		ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
 
-		// Le kit contient 1 bloc Porte.
-		blocs.add(new Porte(1, 2, 2, true));
+		Callable<IBloc> taskMur1 = () -> { return new Mur(3, 2, 2, true); };
+		Callable<IBloc> taskMur2 = () -> { return new Mur(2, 1, 2, false); };
+		Callable<IBloc> taskPorte = () -> {	return new Porte(1, 2, 2, true); };
+		Callable<IBloc> taskToit = () -> { return new Toit(3, 1, 1); };
+		List<Callable<IBloc>> tasks = Arrays.asList(taskMur1, taskMur1, taskMur2, taskMur2, taskPorte, taskToit);
 
-		// Le kit contient 4 blocs Toit.
-		blocs.add(new Toit(3, 1, 1));
-		blocs.add(new Toit(3, 1, 1));
-		blocs.add(new Toit(3, 1, 1));
-		blocs.add(new Toit(3, 1, 1));
+		try {
+			List<Future<IBloc>> resultats = executorService.invokeAll(tasks);
+			resultats.forEach((resultat) -> {
+				try {
+					blocs.add(resultat.get());
+				} catch (InterruptedException | ExecutionException e) {
+					logger.error("Erreur lors de la création parallèle des blocs.");
+				}
+			});
+		} catch (InterruptedException e) {
+			logger.error("Erreur lors de la création parallèle des blocs.");
+		}
+
+		executorService.shutdown();
 
 		return blocs;
 	}
