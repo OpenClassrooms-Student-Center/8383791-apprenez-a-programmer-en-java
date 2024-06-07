@@ -1,4 +1,6 @@
-package ej;
+package ej.blocs;
+
+import ej.IllegalBlocException;
 
 public class Mur extends Bloc {
 

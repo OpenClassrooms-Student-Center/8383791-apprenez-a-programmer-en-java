@@ -3,6 +3,10 @@ package ej;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import ej.blocs.IBloc;
+import ej.blocs.Mur;
+import ej.blocs.Porte;
+
 public class Kit {
 
 	private Set<IBloc> blocs = new LinkedHashSet<IBloc>();
