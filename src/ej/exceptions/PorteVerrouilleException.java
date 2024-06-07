@@ -1,4 +1,4 @@
-package ej;
+package ej.exceptions;
 
 public class PorteVerrouilleException extends Exception {
 

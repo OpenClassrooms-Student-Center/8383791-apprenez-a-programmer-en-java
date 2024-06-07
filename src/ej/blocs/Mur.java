@@ -1,6 +1,6 @@
 package ej.blocs;
 
-import ej.IllegalBlocException;
+import ej.exceptions.IllegalBlocException;
 
 public class Mur extends Bloc {
 
@@ -8,9 +8,8 @@ public class Mur extends Bloc {
 
 	public Mur(final int longueur, final int largeur, final int hauteur, final boolean porteur)
 			throws IllegalBlocException {
-		super(longueur, largeur, hauteur);
+		super(longueur, largeur, hauteur, Couleur.GRIS);
 		this.porteur = porteur;
-		this.couleur = Couleur.GRIS;
 	}
 
 	public boolean estTraversable() {

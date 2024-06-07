@@ -3,8 +3,8 @@ package ej.blocs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import ej.IllegalBlocException;
-import ej.PorteVerrouilleException;
+import ej.exceptions.IllegalBlocException;
+import ej.exceptions.PorteVerrouilleException;
 
 public class Porte extends Bloc {
 	
@@ -14,9 +14,8 @@ public class Porte extends Bloc {
 
 	public Porte(final int longueur, final int largeur, final int hauteur, final boolean verrouillee)
 			throws IllegalBlocException {
-		super(longueur, largeur, hauteur);
+		super(longueur, largeur, hauteur, Couleur.BLEU);
 		this.verrouillee = verrouillee;
-		this.couleur = Couleur.BLEU;
 	}
 
 	public boolean estVerrouillee() {
