@@ -44,22 +44,18 @@ public class Main {
 				// Il affiche les mots clés associés au Kit pour donner des idées à l'utilisateur.
 				System.out.println("Voici quelques idées de constructions avec le Kit de démarrage : ");
 				Set<String> motsCles = kit.getMotsCles();
-				for(String mot : motsCles) {
-					System.out.println(mot);
-				}			
+				motsCles.forEach((mot) -> System.out.println(mot));		
 			} else if(reponse.equals("2")) {
 				// Il affiche à l'utilisateur le nombre de blocs en fonction du type à contenu par le Kit.
 				System.out.println("Voici le nombre de blocs de chaque type contenu dans le Kit de démarrage : ");
 				Map<Type, Integer> quantiteBloc = new TreeMap<Type, Integer>(); // La TreeMap permet de trier les entrées par ordre alphabétique de la clé.
-				for (IBloc bloc : kit.getBlocs()) {
+				kit.getBlocs().forEach((bloc) -> {
 					Type type = Type.valueOf(bloc.getClass().getSimpleName().toUpperCase());
 					int quantite = quantiteBloc.getOrDefault(type, 0) + 1; // Quantite existante + 1.
 					quantiteBloc.put(type, quantite);
-				}
+				});
 				Set<Type> types = quantiteBloc.keySet();
-				for(Type type : types) {
-					System.out.println(type.toString() + " " + quantiteBloc.get(type));
-				}	
+				types.forEach((type) -> System.out.println(type.toString() + " " + quantiteBloc.get(type)));
 			} else {
 				System.out.println("La valeur saisie n'est pas valide - tapez 1 ou 2.");
 			}
