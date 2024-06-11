@@ -38,7 +38,7 @@ public class KitDemarrage {
 	public void afficherKit() {
 		System.out.println("Nombre de blocs dans le kit : " + blocs.size());
 		System.out.print("Liste des mots clés du kit : ");
-		motsCles.forEach( (motCle) -> System.out.println(motCle) );
+		motsCles.forEach(System.out::println);
 	}
 	
 	public void sauvegarder() {
