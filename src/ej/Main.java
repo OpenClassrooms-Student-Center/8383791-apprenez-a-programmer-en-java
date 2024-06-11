@@ -44,7 +44,7 @@ public class Main {
 				// Il affiche les mots clés associés au Kit pour donner des idées à l'utilisateur.
 				System.out.println("Voici quelques idées de constructions avec le Kit de démarrage : ");
 				Set<String> motsCles = kit.getMotsCles();
-				motsCles.forEach((mot) -> System.out.println(mot));		
+				motsCles.forEach(System.out::println);		
 			} else if(reponse.equals("2")) {
 				// Il affiche à l'utilisateur le nombre de blocs en fonction du type à contenu par le Kit.
 				System.out.println("Voici le nombre de blocs de chaque type contenu dans le Kit de démarrage : ");
